@@ -57,7 +57,7 @@
 
   /* Hero */
   header.hero {
-    max-width: var(--maxw); margin: 0 auto; padding: 72px 20px 48px;
+    max-width: var(--maxw); margin: 0 auto; padding: 64px 20px 40px;
     display: grid; grid-template-columns: 160px 1fr; gap: 40px; align-items: center;
   }
   .portrait {
@@ -67,7 +67,7 @@
     font-family: "Source Serif 4", Georgia, serif; font-size: 56px; font-weight: 600;
     overflow: hidden; box-shadow: 0 10px 30px rgba(31, 94, 79, 0.18);
   }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
   .eyebrow { color: var(--warm); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
   .hero h1 { font-size: clamp(36px, 6vw, 52px); margin: 0 0 10px; }
   .hero p.lead { margin: 0; color: var(--ink-soft); font-size: 18px; }
@@ -117,6 +117,48 @@
     border-radius: 10px; padding: 14px 18px;
   }
 
+
+  /* Carrousel */
+  .carousel-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 56px; }
+  .carousel { position: relative; border-radius: var(--radius); overflow: hidden; background: #1c2421; aspect-ratio: 16 / 9; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .track { display: flex; height: 100%; transition: transform .45s ease; }
+  .slide { flex: 0 0 100%; height: 100%; margin: 0; position: relative; overflow: hidden; }
+  .slide .bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(22px) brightness(.55); }
+  .slide img { position: relative; width: 100%; height: 100%; object-fit: contain; display: block; }
+  .nav-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(255,255,255,.88); color: var(--ink); font-size: 30px; line-height: 1;
+    display: flex; align-items: center; justify-content: center; padding-bottom: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.2); transition: background .15s, transform .15s;
+  }
+  .nav-btn:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+  .nav-btn:focus-visible { outline: 3px solid var(--warm); outline-offset: 2px; }
+  .prev { left: 14px; } .next { right: 14px; }
+  .carousel-foot {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 18px 14px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,.55)); color: #fff; font-size: 14px; font-weight: 500;
+  }
+  .dots { display: flex; gap: 8px; }
+  .dots button { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; cursor: pointer; background: rgba(255,255,255,.5); }
+  .dots button[aria-selected="true"] { background: #fff; transform: scale(1.25); }
+
+  /* Photo dans le texte */
+  .inline-photo { margin: 4px 0 22px; }
+  .inline-photo img { width: 100%; border-radius: 10px; display: block; aspect-ratio: 4 / 3; object-fit: cover; }
+  .inline-photo figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+  @media (min-width: 760px) {
+    .inline-photo { float: right; width: 44%; margin: 4px 0 14px 26px; }
+    .card::after { content: ""; display: block; clear: both; }
+  }
+  @media (max-width: 680px) {
+    .carousel { aspect-ratio: 4 / 3; }
+    .nav-btn { width: 38px; height: 38px; font-size: 24px; }
+    .prev { left: 8px; } .next { right: 8px; }
+    .carousel-wrap { padding-bottom: 36px; }
+  }
+
   footer { text-align: center; color: var(--muted); font-size: 14px; padding: 32px 20px 48px; border-top: 1px solid var(--line); }
 
   @media (max-width: 680px) {
@@ -152,14 +194,30 @@
 </nav>
 
 <header class="hero">
-  <!-- Pour ajouter une photo : remplacer « OG » par <img src="images/portrait.jpg" alt="Olivier Giroux"> -->
-  <div class="portrait" aria-hidden="true">OG</div>
+  <div class="portrait"><img src="images/portrait.jpg" alt="Portrait d'Olivier Giroux"></div>
   <div>
     <p class="eyebrow">Portfolio professionnel</p>
     <h1>Olivier Giroux</h1>
     <p class="lead">Génie du bâtiment — Université de Sherbrooke</p>
   </div>
 </header>
+
+<div class="carousel-wrap">
+  <div class="carousel" id="carousel" aria-roledescription="carrousel" aria-label="Photos de mon échange étudiant">
+    <div class="track">
+      <figure class="slide"><div class="bg" style="background-image:url(images/voyage-1.jpg)"></div><img src="images/voyage-1.jpg" alt="Photo de groupe dans un paysage de montagnes enneigées"></figure>
+      <figure class="slide"><div class="bg" style="background-image:url(images/voyage-2.jpg)"></div><img src="images/voyage-2.jpg" alt="Devant le Colisée de Rome" loading="lazy"></figure>
+      <figure class="slide"><div class="bg" style="background-image:url(images/voyage-3.jpg)"></div><img src="images/voyage-3.jpg" alt="Visite de chantier en équipe, casques et dossards" loading="lazy"></figure>
+      <figure class="slide"><div class="bg" style="background-image:url(images/voyage-4.jpg)"></div><img src="images/voyage-4.jpg" alt="Devant les anneaux olympiques" loading="lazy"></figure>
+    </div>
+    <button class="nav-btn prev" aria-label="Photo précédente">&#8249;</button>
+    <button class="nav-btn next" aria-label="Photo suivante">&#8250;</button>
+    <div class="carousel-foot">
+      <span class="cap">Échange étudiant — ULB, Belgique</span>
+      <div class="dots" role="tablist"></div>
+    </div>
+  </div>
+</div>
 
 <main>
 
@@ -169,8 +227,8 @@
     <h2>Identité professionnelle</h2>
     <div class="prose">
       <p>Mon désir de devenir ingénieur remonte à aussi loin que je me souvienne. Dans un album de finissants du primaire où on nous demandait ce qu'on voulait faire plus tard, j'avais déjà écrit « ingénieur ». C'est au cégep, en sciences de la nature, que mon intérêt s'est précisé concrètement : la physique m'a happé, et c'est tout naturellement que je me suis dirigé vers le génie du bâtiment à l'Université de Sherbrooke, avec en tête l'idée de devenir concepteur de structures.</p>
-      <p>Plus j'avançais dans mon programme, plus je réalisais que ce n'était pas la structure elle-même qui me passionnait. La découverte de la mécanique des fluides et des échanges thermiques dans les systèmes mécaniques du bâtiment a changé ma trajectoire : j'ai voulu comprendre comment un bâtiment respire, consomme et peut consommer moins. Mon intérêt s'est ainsi réorienté vers la mécanique du bâtiment et l'efficacité énergétique.</p>
-      <p>Je suis quelqu'un qui a besoin d'aller au fond des choses. Je ne me contente pas de suivre une procédure sans en comprendre le pourquoi, et je vérifie mes décisions plusieurs fois avant de les soumettre. Je ne suis pas un quelqu’un qui travaille bien seul dans son coin : j'ai besoin d'interagir, de bouger, d'échanger avec une équipe. Mon stage chez Akonovia me l'a rappelé de façon concrète. Il y a eu une période où plusieurs mandats se sont accumulés en même temps, et j'ai vécu un stress réel à l'idée de ne pas livrer à temps. Je ne vous cacherai pas que c'était une période difficile. Mais plutôt que de m'isoler avec cette inquiétude, j'en ai parlé ouvertement à mon superviseur. Le plan qu'on a bâti ensemble a fait disparaître la majorité de mes craintes. C'est une leçon que je porte encore aujourd'hui : la rigueur individuelle ne suffit pas sans la capacité à communiquer honnêtement sur ses limites.</p>
+      <p>Plus j'avançais dans mon programme, plus je réalisais que ce n'était pas la structure qui me passionnait. La découverte de la mécanique des fluides et des échanges thermiques dans les systèmes mécaniques du bâtiment a changé ma trajectoire : j'ai voulu comprendre comment un bâtiment respire, consomme et peut consommer moins. Mon intérêt s'est ainsi réorienté vers la mécanique du bâtiment et l'efficacité énergétique.</p>
+      <p>Je suis quelqu'un qui a besoin d'aller au fond des choses. Je ne me contente pas de suivre une procédure sans en comprendre le pourquoi, et je vérifie mes décisions plusieurs fois avant de les soumettre. Je ne suis pas un quelqu’un qui travaille bien seul dans son coin : j'ai besoin d'interagir, de bouger, d'échanger avec une équipe. Mon stage chez Akonovia me l'a rappelé de façon concrète. Il y a eu une période où plusieurs mandats se sont accumulés en même temps, et j'ai vécu un stress réel à l'idée de ne pas livrer à temps. Plutôt que de m'isoler avec cette inquiétude, j'en ai parlé ouvertement à mon superviseur. Le plan qu'on a bâti ensemble a fait disparaître la majorité de mes craintes. C'est une leçon que je porte encore aujourd'hui : la rigueur individuelle ne suffit pas sans la capacité à communiquer honnêtement sur ses limites.</p>
       <p>Mon échange à l'ULB, en Belgique, a élargi ma compréhension de la profession d'une autre façon. J'y ai constaté à quel point le contexte géographique. L'accès à l'énergie, les matériaux disponibles et le climat transforme fondamentalement les choix de conception d'un bâtiment. Ce constat a renforcé ma conviction que l'ingénieur en bâtiment ne peut pas appliquer des solutions génériques : il doit comprendre le contexte avant de proposer une solution.</p>
       <p>Je suis conscient que la construction demeure l'une des industries les plus polluantes, et je crois que l'efficacité énergétique n'est plus une option dans le contexte climatique, économique et politique actuel. C'est une nécessité centrale de la pratique. C'est cette conviction, combinée à l'intérêt pour la simulation énergétique développé lors de mon projet de fin de baccalauréat, qui guide mes objectifs de carrière à court terme. Je cherche un poste qui combine simulation et efficacité énergétique, dans un environnement où je peux à la fois identifier un problème sur papier et aller le constater sur le terrain.</p>
     </div>
@@ -229,6 +287,10 @@
       <article class="card">
         <div class="card-head"><span class="badge">3.4</span><h3>Aspects financiers et budgétaires</h3></div>
         <p>Lors de mon stage de coordonnateur de projets et surveillant de chantier à l'Université Bishop's (automne 2025), j'ai participé au suivi financier d'un projet d'agrandissement de résidence étudiante d'environ 19 M$. À titre de donneur d'ouvrage, l'université devait s'assurer que les sommes versées à l'entrepreneur et aux professionnels correspondaient aux travaux et aux services réellement rendus.</p>
+        <figure class="inline-photo">
+          <img src="images/chantier.jpg" alt="Chantier d'agrandissement : charpente d'acier en montage et grue" loading="lazy">
+          <figcaption>Surveillance de chantier — stage à l'Université Bishop's, automne 2025</figcaption>
+        </figure>
         <ul>
           <li>J'ai vérifié les demandes de paiement de l'entrepreneur en comparant l'avancement facturé à l'avancement réel observé lors de la surveillance de chantier et à l'échéancier des travaux.</li>
           <li>J'ai fait le suivi des honoraires des professionnels pour m'assurer que leur facturation respectait les mandats prévus à leurs contrats.</li>
@@ -272,7 +334,6 @@
       <li>Adhérer à l'AQME et à ASHRAE (section de Montréal) et participer à leurs conférences et webinaires.</li>
       <li>Assurer une veille des programmes de subvention en efficacité énergétique et en décarbonation (p. ex. Hydro-Québec Solutions efficaces, Énergir).</li>
       <li>Respecter les exigences de formation continue de l'OIQ et suivre des formations ciblées selon l'évolution des codes et normes (p. ex. Code de construction du Québec, chapitre I.1 — Efficacité énergétique, normes ASHRAE).</li>
-      <li>Réaliser l'examen professionnel de l'OIQ afin d'obtenir mon permis d'ingénieur.</li>
     </ul>
   </section>
 
@@ -292,6 +353,41 @@
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => s && obs.observe(s));
+
+  // Carrousel de photos
+  (function () {
+    const root = document.getElementById('carousel');
+    const track = root.querySelector('.track');
+    const slides = root.querySelectorAll('.slide');
+    const dotsBox = root.querySelector('.dots');
+    let i = 0;
+    slides.forEach((_, k) => {
+      const d = document.createElement('button');
+      d.setAttribute('role', 'tab');
+      d.setAttribute('aria-label', 'Photo ' + (k + 1));
+      d.addEventListener('click', () => go(k));
+      dotsBox.appendChild(d);
+    });
+    const dots = dotsBox.querySelectorAll('button');
+    function go(n) {
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(' + (-100 * i) + '%)';
+      dots.forEach((d, k) => d.setAttribute('aria-selected', k === i));
+    }
+    root.querySelector('.prev').addEventListener('click', () => go(i - 1));
+    root.querySelector('.next').addEventListener('click', () => go(i + 1));
+    root.tabIndex = 0;
+    root.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1); if (e.key === 'ArrowRight') go(i + 1); });
+    let x0 = null;
+    root.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1);
+      x0 = null;
+    });
+    go(0);
+  })();
 </script>
 </body>
 </html>
