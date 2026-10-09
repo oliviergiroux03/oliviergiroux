@@ -170,6 +170,14 @@
   .prose h3.sub { font-size: 22px; margin: 32px 0 12px; }
   .prose ul.goals { padding-left: 0; list-style: none; margin: 0 0 1.1em; display: grid; gap: 10px; }
   .prose ul.goals li { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 12px 16px; }
+  .inline-photo.album img { aspect-ratio: auto; object-fit: contain; background: #fff; border: 1px solid var(--line); }
+  .prose::after { content: ""; display: block; clear: both; }
+  @media (min-width: 760px) { .inline-photo.album { width: 48%; margin-top: 6px; } }
+  /* Texte justifié */
+  .prose p, .card p, .card li, .prose ul.goals li, .plan ul li {
+    text-align: justify; text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto;
+  }
+  .inline-photo figcaption { text-align: left; }
   footer { text-align: center; color: var(--muted); font-size: 14px; padding: 32px 20px 48px; border-top: 1px solid var(--line); }
 
   @media (max-width: 680px) {
@@ -210,7 +218,7 @@
     <p class="eyebrow">Portfolio professionnel</p>
     <h1>Olivier Giroux</h1>
     <p class="lead">Génie du bâtiment — Université de Sherbrooke</p>
-    <a class="cv-btn" href="cv/CV_Olivier_Giroux.pdf" target="_blank" rel="noopener">
+    <a class="cv-btn" href="CV_Olivier_Giroux.pdf" target="_blank" rel="noopener">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
       Voir mon CV
     </a>
@@ -241,7 +249,11 @@
     <p class="section-label">Qui je suis</p>
     <h2>Identité professionnelle</h2>
     <div class="prose">
-      <p>Mon intérêt pour le génie remonte à l'enfance. Dans l'album des finissants de mon école primaire, à la question de ce que je souhaitais faire plus tard, j'avais déjà inscrit « ingénieur ». Ce qui m'attirait alors, c'était de comprendre comment les objets sont conçus et comment ils fonctionnent. Devant un bâtiment de grande envergure, je m'interrogeais sur ce qui lui permettait de tenir en place et sur le comportement de sa structure. Au cégep, mes études en sciences de la nature ont permis de préciser cette curiosité : la physique m'a fourni les premiers outils pour répondre à ces questions. J'ai ensuite choisi le baccalauréat en génie du bâtiment à l'Université de Sherbrooke, avec l'objectif de devenir concepteur de structures.</p>
+      <figure class="inline-photo album">
+        <img src="images/album-primaire.jpg" alt="Page de l'album des finissants du primaire, où il est inscrit « Ce que je veux faire : Ingénieur Mécanique »" loading="lazy">
+        <figcaption>Album des finissants du primaire : « Ce que je veux faire : Ingénieur Mécanique »</figcaption>
+      </figure>
+      <p>Mon intérêt pour le génie remonte à l'enfance. Dans l'album des finissants de mon école primaire, à la question de ce que je souhaitais faire plus tard, j'avais déjà inscrit « ingénieur mécanique ». Ce qui m'attirait alors, c'était de comprendre comment les objets sont conçus et comment ils fonctionnent. Devant un bâtiment de grande envergure, je m'interrogeais sur ce qui lui permettait de tenir en place et sur le comportement de sa structure. Au cégep, mes études en sciences de la nature ont permis de préciser cette curiosité : la physique m'a fourni les premiers outils pour répondre à ces questions. J'ai ensuite choisi le baccalauréat en génie du bâtiment à l'Université de Sherbrooke, avec l'objectif de devenir concepteur de structures.</p>
       <p>Au fil de mes études, cette même curiosité s'est déplacée de la structure vers ce qui circule à l'intérieur du bâtiment. Le cours d'introduction à la thermodynamique a été déterminant : en apprenant à dresser des bilans de masse et d'énergie, à évaluer le rendement de différents systèmes et à analyser les cycles de conditionnement d'air, j'ai découvert que je pouvais comprendre comment un bâtiment respire, consomme et peut consommer moins. L'approche du cours, qui relie la conversion de l'énergie à ses effets sur l'environnement, rejoignait mon besoin de comprendre le fonctionnement des systèmes en profondeur. Mon intérêt s'est ainsi réorienté vers la mécanique du bâtiment et l'efficacité énergétique, une orientation que mes stages en conception de systèmes de ventilation et en mécanique du bâtiment ont ensuite confirmée.</p>
       <p>Je suis une personne qui a besoin d'aller au fond des choses. Je ne me contente pas d'appliquer une procédure sans en comprendre la raison d'être, et je vérifie mes décisions avant de les soumettre. Dans mon projet de fin de baccalauréat, par exemple, plutôt que d'accepter directement les résultats de mon logiciel de simulation, j'ai validé les charges de chauffage par un calcul manuel indépendant (voir la compétence 1.4). J'ai également besoin de constater les enjeux sur le terrain : me rendre en chantier pour observer une situation me permet de mieux comprendre un problème et de faire un meilleur travail une fois de retour au bureau.</p>
       <p>Je suis également convaincu que les meilleures solutions naissent de la collaboration. Lors de mon stage à l'Université Bishop's, les murs du bâtiment en construction ne pouvaient être fermés avant l'hiver, et l'équipe prévoyait chauffer le chantier à l'aide de radiateurs industriels au propane. Un technicien de l'université m'a signalé qu'une conduite de gaz naturel inutilisée passait près du chantier. J'ai estimé les économies d'un chauffage au gaz naturel par rapport au propane, puis j'en ai discuté avec mon superviseur, et nous avons convenu que cette option était préférable. Avec le contremaître, nous avons fait localiser la conduite et vérifié son étanchéité par un essai de maintien de pression. Le chantier a finalement été chauffé au gaz naturel, ce qui a permis de réaliser des économies.</p>
@@ -253,7 +265,7 @@
         <li><strong>Intégrer un poste en efficacité énergétique</strong>, que ce soit en simulation, en audit ou en gestion de l'énergie, qui allie l'analyse au bureau et les visites sur le terrain, afin de constater l'état des installations et de proposer des solutions d'amélioration concrètes.</li>
         <li><strong>Progresser vers l'obtention de mon permis d'ingénieur</strong>, en m'inscrivant comme CPI dès la fin de mes études et en accumulant une expérience diversifiée.</li>
         <li><strong>Approfondir mes compétences en efficacité énergétique</strong>, notamment par la formation Gestion et audit de l'énergie de l'ÉTS en 2027.</li>
-        <li><strong>Me former en gestion de projet</strong>, en commençant par la certification CAPM d'ici 2028.</li>
+        <li><strong>Me former en gestion de projet</strong>, en commençant ma maîtrise en gestion de l’ingénierie à temps partiel dès 2027.</li>
       </ul>
       <p>Ces objectifs s'inscrivent dans mon plan de développement professionnel, présenté plus bas.</p>
     </div>
@@ -348,21 +360,18 @@
         </thead>
         <tbody>
           <tr><td class="year">2027</td><td>Formation <em>Gestion et audit de l'énergie</em> (ÉTS Formation, PER-512, 14 h)</td><td class="gap">Audit et gestion de l'énergie</td></tr>
-          <tr><td class="year">2027</td><td>Formation sur le logiciel RETScreen (analyse de faisabilité et de rentabilité des mesures)</td><td class="gap">Analyse technico-financière</td></tr>
-          <tr><td class="year">2027-2028</td><td>Certification CAPM (PMI)</td><td class="gap">Gestion de projet</td></tr>
-          <tr><td class="year">2028</td><td>Formation et examen CEM, statut <em>Energy Manager in Training</em> (AEE)</td><td class="gap">Audit et gestion de l'énergie</td></tr>
-          <tr><td class="year">2028-2030</td><td>Maîtrise en gestion de l'ingénierie (Université de Sherbrooke, temps partiel) — incluant analyse financière et gestion de projet</td><td class="gap">Gestion de projet, analyse technico-financière</td></tr>
-          <tr><td class="year">2029</td><td>Certification CMVP — mesurage et vérification (AEE)</td><td class="gap">Audit et gestion de l'énergie</td></tr>
-          <tr><td class="year">2030</td><td>Certification CEM complète, une fois l'expérience requise acquise</td><td class="gap">Audit et gestion de l'énergie</td></tr>
+          <tr><td class="year">2027-2030</td><td>Maîtrise en gestion de l'ingénierie (Université de Sherbrooke, temps partiel), incluant la gestion de projet et l'analyse financière</td><td class="gap">Gestion de projet, analyse technico-financière</td></tr>
+          <tr><td class="year">2028-2030</td><td>Certification CEM (AEE) : formation et examen sous le statut <em>Energy Manager in Training</em>, puis certification complète une fois l'expérience requise acquise</td><td class="gap">Audit et gestion de l'énergie</td></tr>
         </tbody>
       </table>
     </div>
 
     <h3>Indicateur 2 — Me tenir à jour</h3>
     <ul>
-      <li>Adhérer à l'AQME et à ASHRAE (section de Montréal) et participer à leurs conférences et webinaires.</li>
-      <li>Assurer une veille des programmes de subvention en efficacité énergétique et en décarbonation (p. ex. Hydro-Québec Solutions efficaces, Énergir).</li>
-      <li>Respecter les exigences de formation continue de l'OIQ et suivre des formations ciblées selon l'évolution des codes et normes (p. ex. Code de construction du Québec, chapitre I.1 — Efficacité énergétique, normes ASHRAE).</li>
+      <li>Participer à au moins quatre webinaires par année offerts par des organismes du domaine (p. ex. ASHRAE, AQME).</li>
+      <li>Assurer une veille réglementaire sur le Code de construction du Québec (chapitre I.1 — Efficacité énergétique), les normes ASHRAE applicables et les avis de la RBQ.</li>
+      <li>Suivre l'évolution des programmes de subvention en efficacité énergétique et en décarbonation (p. ex. Hydro-Québec Solutions efficaces, Énergir).</li>
+      <li>Respecter les exigences de formation continue de l'OIQ en tenant un registre de mes heures de formation.</li>
     </ul>
   </section>
 
